@@ -51,8 +51,6 @@ class GimnastaController extends Controller
         $action = "añadido";
         $nombreGimnasta = $request->nombre_g . " " . $request->apellido_g;
 
-        $this->sendMail($nombreGimnasta,  $action);
-
         return redirect('gimnasta')->with('gimnasta', 'agregada');
     }
 
@@ -95,7 +93,6 @@ class GimnastaController extends Controller
         Gimnasta::where('id', $gimnasta->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/
         $nombreGimnasta = $gimnasta->nombre_g . " " . $gimnasta->apellido_g;
         $action = "editado";
-        $this->sendMail($nombreGimnasta, $action);
 
         return redirect()->route('gimnasta.show', $gimnasta)->with('gimnasta', 'editada');
     }
@@ -113,7 +110,6 @@ class GimnastaController extends Controller
         $nombreGimnasta = $gimnasta->nombre_g . " " . $gimnasta->apellido_g;
         $action = "eliminado";
         $gimnasta->delete();
-        $this->sendMail($nombreGimnasta, $action);
         return redirect()->route('gimnasta.index')->with('gimnasta', 'eliminada');
     }
 
@@ -132,8 +128,4 @@ class GimnastaController extends Controller
      * Sends eMail
      */
 
-     public function sendMail(string $nombreGimnasta, string $action){
-        $mailable = new notificationMail($nombreGimnasta, $action);
-        Mail::to(Auth::user()->email)->send($mailable);
-     }
 }

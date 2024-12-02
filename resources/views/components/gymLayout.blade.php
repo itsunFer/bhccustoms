@@ -84,30 +84,22 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('news.index')}}">
           <i class="bi bi-layout-text-window-reverse"></i>
-          <span>Noticias</span>
+          <span>News</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-person-lines-fill"></i><span>Gimnastas</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="{{route('gimnasta.index')}}">
+          <i class="bi bi-person-plus-fill"></i>
+          <span>Players</span>
         </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            @foreach ($gimn as $gim)
-               <li>
-                   <a href="{{route('gimnasta.show', $gim->id)}}">
-                       <i class="bi bi-circle"></i><span>{{$gim->nombre_g}} {{$gim->apellido_g}}</span>
-                   </a>
-               </li>
-               @endforeach
-           </ul>
       </li><!-- End Components Nav -->
 
       @if (Auth::user()->is_admin==true)  {{--Solo los admins tienen acceso--}}
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{route('gimnasta.create')}}">
             <i class="bi bi-person-plus-fill"></i>
-            <span>Agregar gimnasta</span>
+            <span>Add player</span>
           </a>
         </li>
       @endif
@@ -115,28 +107,28 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('competencia.index')}}">
           <i class="bi bi-layout-text-window-reverse"></i>
-          <span>Competencias</span>
+          <span>Games</span>
         </a>
       </li>
-
+      <!--
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('equipo.index')}}">
           <i class="ri-team-fill"></i>
           <span>Equipos</span>
         </a>
       </li>
-
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('score.index')}}">
           <i class="bx bx-list-check"></i>
           <span>Puntuaciones</span>
         </a>
       </li>
-
+-->
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('forum.index')}}">
           <i class="bi bi-layout-text-window-reverse"></i>
-          <span>Foros</span>
+          <span>Forum</span>
         </a>
       </li>
 
@@ -148,44 +140,6 @@
           </a>
         </li>
       @endif
-
-
-      <li class="nav-heading">Redes</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="https://instagram.com/gymicetics?igshid=YmMyMTA2M2Y=" target="_blank">
-          <i class="bi bi-instagram"></i>
-          <span>Instagram</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="https://www.youtube.com/@gymicetics8841" target="_blank">
-          <i class="bi bi-youtube"></i>
-          <span>Youtube</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="https://open.spotify.com/show/4hNl3wukCJzbzT3y2I6rPm" target="_blank">
-          <i class="bi bi-spotify"></i>
-          <span>Spotify</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="mailto: gymicetics@gmail.com">
-          <i class="ri ri-mail-line"></i>
-          <span>Correo</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="https://twitter.com/home?lang=es" target="_blank">
-          <i class="bi bi-twitter"></i>
-          <span>Twitter</span>
-        </a>
-      </li><!-- End Login Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->
