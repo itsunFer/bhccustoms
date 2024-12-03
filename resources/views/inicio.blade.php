@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BHC Stats - Join</title>
+  <title>BHC Stats</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -60,12 +60,12 @@
                 </div>--}}
                 <ul>
                     @auth
-                        <li><a class="nav-link scrollto active" href="{{ route('player.index') }}">Inicio</a></li>
+                        <li><a class="nav-link scrollto active" href="{{ route('player.index') }}">Home</a></li>
                     @else
-                        <li><a class="nav-link scrollto" href="{{ route('login') }}">Iniciar sesión</a></li>
+                        <li><a class="nav-link scrollto" href="{{ route('login') }}">Login</a></li>
 
                         @if (Route::has('register'))
-                            <li><a class="nav-link scrollto" href="{{ route('register') }}">Registrarse</a></li>
+                            <li><a class="nav-link scrollto" href="{{ route('register') }}">Sign Up</a></li>
                         @endif
                     @endauth
                 </ul>
