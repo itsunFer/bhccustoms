@@ -18,9 +18,7 @@ class GimnastaController extends Controller
      */
     public function index()
     {
-        $gimnastas = Gimnasta::with('paises')
-        ->orderBy("paises_id")
-        ->paginate(10); //Using 'with' we are implementing eager loading
+        $gimnastas = Gimnasta::all();
         return view('gimnastas.indexGimnasta', compact('gimnastas'));
     }
 
@@ -30,8 +28,7 @@ class GimnastaController extends Controller
     public function create()
     {
         $this->authorize('create', Gimnasta::class);
-        $paises = Pais::orderBy('nombre_p')->get();
-        return view('gimnastas.createGimnasta', compact('paises'));
+        return view('gimnastas.createGimnasta');
     }
 
     /**
@@ -42,14 +39,12 @@ class GimnastaController extends Controller
         $this->authorize('create', Gimnasta::class);
         $request->validate([
             'nombre_g' => ['required', 'max:255'],
-            'apellido_g' => ['required', 'max:255'],
-            'fecha_n_g'=> ['required', 'date'],
-            'paises_id'=>['required', 'exists:paises,id'],
+            'gametag' => ['required', 'max:255'],
         ]);
         Gimnasta::create($request->all()); 
 
         $action = "añadido";
-        $nombreGimnasta = $request->nombre_g . " " . $request->apellido_g;
+        $nombreGimnasta = $request->nombre_g . " " . $request->gametag;
 
         return redirect('gimnasta')->with('gimnasta', 'agregada');
     }
@@ -62,9 +57,8 @@ class GimnastaController extends Controller
         $imagen = Picture::where('gimnastas_id', '=', $gimnasta->id)
         ->where('approved', true)
         ->get(); //Searches up for the pictures of the gymnast
-        $paises= Pais::find($gimnasta->id);
         
-        return view('gimnastas.show-gimnasta', compact('gimnasta', 'paises', 'imagen'));
+        return view('gimnastas.show-gimnasta', compact('gimnasta'));
     }
 
     /**
@@ -73,8 +67,7 @@ class GimnastaController extends Controller
     public function edit(Gimnasta $gimnasta)
     {
         $this->authorize('create', $gimnasta);
-        $paises = Pais::orderBy('nombre_p')->get();
-        return view('gimnastas.edit-gimnasta', compact('gimnasta', 'paises'));
+        return view('gimnastas.edit-gimnasta', compact('gimnasta'));
     }
 
     /**
@@ -85,13 +78,11 @@ class GimnastaController extends Controller
         $this->authorize('create', $gimnasta);
         $request->validate([
             'nombre_g' => ['required', 'max:255'],
-            'apellido_g' => ['required', 'max:255'],
-            'fecha_n_g'=> ['required', 'date'],
-            'paises_id'=>['required', 'exists:paises,id'],
+            'gametag' => ['required', 'max:255'],
         ]);
         
         Gimnasta::where('id', $gimnasta->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/
-        $nombreGimnasta = $gimnasta->nombre_g . " " . $gimnasta->apellido_g;
+        $nombreGimnasta = $gimnasta->nombre_g . "'" . $gimnasta->gametag . "'";
         $action = "editado";
 
         return redirect()->route('gimnasta.show', $gimnasta)->with('gimnasta', 'editada');
@@ -107,7 +98,7 @@ class GimnastaController extends Controller
         foreach($pics as $pic){
             Storage::delete($pic->hash); //elimina todas las imagenes relacionadas a la gimnasta a eliminar
         }
-        $nombreGimnasta = $gimnasta->nombre_g . " " . $gimnasta->apellido_g;
+        $nombreGimnasta = $gimnasta->nombre_g . "'" . $gimnasta->gametag . "'";
         $action = "eliminado";
         $gimnasta->delete();
         return redirect()->route('gimnasta.index')->with('gimnasta', 'eliminada');

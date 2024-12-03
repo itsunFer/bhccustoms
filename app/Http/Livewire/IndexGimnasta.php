@@ -14,7 +14,6 @@ class IndexGimnasta extends Component
 
     use WithPagination;
 
-    public $paisesFilter;
     public $nombreFilter;
     public $display=false;
 
@@ -22,17 +21,12 @@ class IndexGimnasta extends Component
 
     public function render()
     {
-        $paises = Pais::orderBy('nombre_p')->get();
         $gimnastas = Gimnasta::query()
-        ->when($this->paisesFilter, function($query){
-            $query->where('paises_id', $this->paisesFilter);
-        })
         ->when($this->nombreFilter, function($query){
             $query->where('nombre_g', 'like', '%' . $this->nombreFilter . '%');
         })
-        ->with('paises')
-        ->orderBy("paises_id")
+        ->orderBy("nombre_g")
         ->paginate(9);
-        return view('livewire.index-gimnasta', compact('paises', 'gimnastas'));
+        return view('livewire.index-gimnasta', compact('gimnastas'));
     }
 }

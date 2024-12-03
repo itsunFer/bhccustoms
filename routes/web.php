@@ -93,7 +93,7 @@ Route::get('event/{event}/controlI',
     ->middleware('auth');
 
 //SCORES
-Route::get('score/create/{event}',
+Route::get('score/create/{competencia}',
     [ScoreController::class, 'create'])
     ->name('score.create')
     ->middleware('auth');

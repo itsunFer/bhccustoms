@@ -16,9 +16,6 @@ class Gimnasta extends Model
 
     public $timestamps = false;
 
-    public function paises(){
-        return $this->belongsTo(Pais::class);
-    }
 
     public function pictures(){
         return $this->hasMany(Picture::class);
@@ -28,21 +25,6 @@ class Gimnasta extends Model
         return $this->hasMany(Score::class);
     }
 
-    public function equipos(){
-        return $this->belongsToMany(Equipo::class)->withPivot('alternate_g');
-    }
+    protected $fillable = ['nombre_g', 'gametag'];
 
-    protected $fillable = ['nombre_g', 'apellido_g', 'fecha_n_g', 'paises_id',];
-
-    protected function nombreG(): Attribute{
-        return new Attribute(
-            set: fn($value) => ucwords($value) //mutator, cambia la primera letra a mayúscula
-        );
-    }
-
-    protected function apellidoG(): Attribute{
-        return new Attribute(
-            set: fn($value) => ucwords($value) 
-        );
-    }
 }

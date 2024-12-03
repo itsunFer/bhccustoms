@@ -1,41 +1,27 @@
 <x-gymLayout>
     <x-slot:title>
-        Competencias
+        Games
     </x-slot>
-    <h1>Competencias</h1>
+    <h1>Games</h1>
     
 
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Tipo</th>
+            <th scope="col">Map</th>
+            <th score="col">Score</th>
             @if(Auth::user()->is_admin == true)
                 <th></th>
                 <th></th>
             @endif
-            <th class='text-center' scope="col">Ver detalle</th>
+            <th class='text-center' scope="col">Details</th>
           </tr>
         </thead>
         <tbody>
             @foreach ($competencias as $comp)
                 <tr>
-                    <td>{{$comp->nombre_c}}</td>
-                    <td>
-                        @switch($comp->tipo_c)
-                            @case(1)
-                                Nacional
-                                @break
-                            @case(2)
-                                Regional
-                                @break
-                             @case(3)
-                                Internacional
-                                @break
-                            @default
-                                nada
-                        @endswitch
-                    </td>
+                    <td>{{$comp->map}}</td>
+                    <td>{{$comp->score}}</td>
                     @if(Auth::user()->is_admin == true)
                         <td>
                             <a href="{{route('competencia.edit', $comp->id)}}"><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button></a>
@@ -61,7 +47,7 @@
                 <tr>
                     <td><a href="{{route('competencia.create')}}">
                         <i class="bi bi-person-plus-fill"></i>
-                        <span>Nueva competencia</span>
+                        <span>Add Game</span>
                     </a></td>
                 </tr>
             @endif

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Score;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
@@ -12,15 +13,10 @@ class Competencia extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['nombre_c', 'tipo_c',];
+    protected $fillable = ['map', 'winners','score'];
 
-    public function events(){
-        return $this->hasMany(Event::class);
+    public function scores(){
+        return $this->hasMany(Score::class);
     }
 
-    protected function nombreC(): Attribute{
-        return new Attribute(
-            set: fn($value) => ucwords($value) 
-        );
-    }
 }

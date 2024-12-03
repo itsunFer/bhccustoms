@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competencia;
-use App\Models\Event;
+use App\Models\Score;
 use App\Models\Pais;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -35,8 +35,9 @@ class CompetenciaController extends Controller
     {
         $this->authorize('create', Competencia::class);
         $request->validate([
-            'nombre_c' => ['required', 'max:255'],
-            'tipo_c' => ['required', 'min:1', 'max:3'],
+            'map' => ['required', 'max:255'],
+            'winners' => ['required', 'min:0', 'max:1'],
+            'score' => ['required'],
         ]);
         Competencia::create($request->all()); 
         return redirect('competencia');
@@ -47,8 +48,10 @@ class CompetenciaController extends Controller
      */
     public function show(Competencia $competencia)
     {
-       $events= Event::with('paises')->where('competencias_id', '=', $competencia->id)->get();
-        return view('competencias.showCompetencia', compact('competencia', 'events'));
+        $scores=Score::query()
+        ->where('competencias_id', $competencia->id)
+        ->get();
+        return view('competencias.showCompetencia', compact('competencia', 'scores'));
     }
 
     /**
@@ -67,8 +70,9 @@ class CompetenciaController extends Controller
     {
         $this->authorize('update', $competencia);
         $request->validate([
-            'nombre_c' => ['required', 'max:255'],
-            'tipo_c' => ['required', 'min:1', 'max:3'],
+            'map' => ['required', 'max:255'],
+            'winners' => ['required', 'min:0', 'max:1'],
+            'score' => ['required'],
         ]);
 
         Competencia::where('id', $competencia->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/

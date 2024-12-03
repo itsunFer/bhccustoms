@@ -1,23 +1,15 @@
 <div>
   <div class='row'>
     <div class="col-md-3">
-      <label for="rounds">Ronda</label>
-      <select wire:model='roundsFilter' class="form-control" name="rounds" id="rounds">
+      <label for="gimnastas">Players</label>
+      <select wire:model='gimnastasFilter' class="form-control" name="gimnastas" id="gimnastas">
         <option value="">--Seleccione</option>
-        @foreach($rounds as $round)
-          <option value="{{$round->id}}">{{$round->nombre_r}}</option>
+        @foreach($gimnastas as $players)
+          <option value="{{$players->id}}">{{$players->gametag}}</option>
         @endforeach
       </select>
     </div>
-    <div class="col-md-3">
-      <label for="events" class="d-inline">Aparato</label>
-      <select wire:model='aparatosFilter' class="form-control d-inline" name="events" id="events">
-        <option value="">--Seleccione</option>
-          @foreach($aparatos as $aparato)
-            <option value="{{$aparato->id}}">{{$aparato->nombre_a}}</option>
-          @endforeach
-      </select>
-    </div>
+
     <div class="col-md-1">
       <br>
       <a href="{{route('score.create', $event)}}"><button type="button" class="btn btn-success">+</button></a>
@@ -59,7 +51,7 @@
         @foreach ($scores as $score)
             <tr>
                 <td>{{$score->gimnastas->nombre_g}} {{$score->gimnastas->apellido_g}}</td>
-                <td>{{$score->rounds->clave_r}}</td>
+                <td>{{$score->gimnastas->clave_r}}</td>
                 <td>{{$score->aparatos->clave_a}}</td>
                 <td>{{$score->difficulty_s}}</td>
                 <td>{{$score->execution_s}}</td>

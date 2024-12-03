@@ -7,6 +7,7 @@ use App\Models\Round;
 use App\Models\Score;
 use App\Models\Aparato;
 use App\Models\Gimnasta;
+use App\Models\Competencia;
 use App\Models\changeScore;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -25,13 +26,11 @@ class ScoreController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Event $event)
+    public function create(Competencia $competencia)
     {
         $gimnastas = Gimnasta::all();
-        $rounds = Round::all();
-        $aparatos = Aparato::all();
 
-        return view('scores.createScore', compact('event', 'gimnastas', 'rounds', 'aparatos'));
+        return view('scores.createScore', compact('gimnastas', 'competencia'));
     }
 
     /**
@@ -39,20 +38,12 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-           'gimnastas_id'=>['required', 'exists:gimnastas,id'], 
-           'events_id'=>['required', 'exists:events,id'],
-           'rounds_id'=>['required', 'exists:rounds,id'],
-           'aparatos_id'=>['required', 'exists:aparatos,id'],
-           'difficulty_s'=>['decimal:0,3', 'required', 'min:0', 'max:8'],
-           'execution_s'=>['decimal:0,2', 'required', 'min:0', 'max:10'],
-           'deductions_s'=>['decimal:0,2', 'required', 'min:0', 'max:10'],  
-       ]);
        $request['user_id'] = Auth::user()->id;
-       $request['total_s'] = $request->difficulty_s + $request->execution_s - $request->deductions_s;
        $request['approved'] = Auth::user()->is_admin == true ? true : false; //si es administrador la aprobará, de lo contrario la deniega
-       Score::create($request->all());
-       return redirect()->route('event.show', $request->events_id)->with('score', 'agregada');
+       $score = new Score();
+       $score->fill($request->all());
+       $score->save();
+       return redirect()->route('competencia.show', $request->input('competencias_id'));
     }
 
     /**
@@ -69,11 +60,8 @@ class ScoreController extends Controller
     public function edit(Score $score)
     {
         //$this->authorize('update', $score);
-        $gimnastas = Gimnasta::all();
-        $rounds = Round::all();
-        $aparatos = Aparato::all();
 
-        return view('scores.editScore', compact('score', 'gimnastas', 'rounds', 'aparatos'));
+        return view('scores.editScore', compact('score'));
     }
 
     /**

@@ -116,15 +116,16 @@
           <i class="ri-team-fill"></i>
           <span>Equipos</span>
         </a>
-      </li>
-      
+      </li>-->
+      @if (Auth::user()->is_admin==true)  {{--Solo los admins tienen acceso--}}
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('score.index')}}">
           <i class="bx bx-list-check"></i>
-          <span>Puntuaciones</span>
+          <span>Scores</span>
         </a>
       </li>
--->
+      @endif
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('forum.index')}}">
           <i class="bi bi-layout-text-window-reverse"></i>

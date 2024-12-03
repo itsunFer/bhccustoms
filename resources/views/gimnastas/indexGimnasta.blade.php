@@ -1,8 +1,8 @@
 <x-gymLayout>
     <x-slot:title>
-        Gimnastas
+        Players
     </x-slot>
-    <h1>Gimnastas</h1>
+    <h1>Players</h1>
     
     @livewire('index-gimnasta')
 

@@ -1,8 +1,8 @@
 <x-gymLayout>
     <x-slot:title>
-        Puntuaciones
+        Stats
     </x-slot>
-    <h1>Puntuaciones</h1>
+    <h1>Stats</h1>
     @livewire('all-scores')
     <x/slot>
 </x-gymLayout>

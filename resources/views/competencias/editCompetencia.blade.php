@@ -1,40 +1,51 @@
 <x-gymLayout>
     <x-slot:title>
-        Editar competencias
+        Edit Game
     </x-slot>
-    <h1>Editar competencias</h1>
+    <h1>Edit {{$competencia->map}} {{$competencia->score}}</h1>
     <form class="row g-3" action="{{route('competencia.update', $competencia)}}" method="POST">
         @csrf
         @method('PATCH')
+
         <div class="col-12">
-          <label for="nombre_c" class="form-label">Nombre: </label>
-          <input type="text" class="form-control" name="nombre_c" id="nombre_c" required value={{old('nombre_c') ?? $competencia->nombre_c}}>
-            @error('nombre_c')
+          <label for="map" class="form-label">Map: </label> <br>
+          <select name="map"  class="form-control" id="map" required>
+            <option value="Abyss" >Abyss</option>
+            <option value="Ascent" >Ascent</option>
+            <option value="Bind" >Bind</option>
+            <option value="Breeze" >Breeze</option>
+            <option value="Fracture" >Fracture</option>
+            <option value="Haven">Haven</option>
+            <option value="Icebox">Icebox</option>
+            <option value="Lotus">Lotus</option>
+            <option value="Pearl">Pearl</option>
+            <option value="Split">Split</option>
+            <option value="Sunset">Sunset</option>
+          </select>
+          @error('map')
                 <h5>{{$message}}</h5>
             @enderror
         </div>
 
         <div class="col-12">
-          <label for="tipo_c" class="form-label">Tipo: </label> <br>
-          <select name="tipo_c"  class="form-control" id="tipo_c" required>
-            <option value="1" @if (old('tipo_c')==1 or $competencia->tipo_c==1) 
-                  selected
-              @endif>Nacional</option>
-              <option value="2" @if (old('tipo_c')==2 or $competencia->tipo_c==2) 
-                  selected
-              @endif>Regional</option>
-              <option value="3" @if (old('tipo_c')==3 or $competencia->tipo_c==3) 
-                  selected
-              @endif>Internacional</option>
-          </select>
-          @error('tipo_c')
+          <label for="score" class="form-label">Score: </label>
+          <input type="text" class="form-control" name="score" id="score" required value={{old('score') ?? $competencia->score}}>
+            @error('score')
+                <h5>{{$message}}</h5>
+            @enderror
+        </div>
+
+        <div class="col-12">
+          <label for="winners" class="form-label">Winners: </label>
+          <input type="text" class="form-control" name="winners" id="winners" required value={{old('winners') ?? $competencia->winners}}>
+            @error('winners')
                 <h5>{{$message}}</h5>
             @enderror
         </div>
 
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Enviar</button>
-            <button type="reset" class="btn btn-secondary">Limpiar</button>
+            <button type="submit" class="btn btn-primary">Send</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
         </div>
       </form><!-- Vertical Form -->
     <x/slot>
