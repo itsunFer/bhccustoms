@@ -7,7 +7,7 @@
         @if(Auth::user()->is_admin == true)
         <div class="col-md-4">
             <br>
-            <a href="{{route('gimnasta.json')}}"><button type="button" class="btn btn-primary">Generar JSON</button></a>
+            <a href="{{route('player.json')}}"><button type="button" class="btn btn-primary">Generar JSON</button></a>
         </div>
         @endif
     </div>
@@ -32,7 +32,7 @@
                     <td>{{$gim->nombre_g}}</td>
                     <td>{{$gim->gametag}}</td>
                     <td class='text-center'>
-                        <a href="/gimnasta/{{$gim->id}}">
+                        <a href="/player/{{$gim->id}}">
                              <i class="bi bi-info-circle-fill"></i>
                         </a>
                     </td>  
@@ -40,7 +40,7 @@
             @endforeach
             @if(Auth::user()->is_admin == true)
               <tr>
-                  <td><a href="{{route('gimnasta.create')}}">
+                  <td><a href="{{route('player.create')}}">
                       <i class="bi bi-person-plus-fill"></i>
                       <span>Add player</span>
                   </a></td>

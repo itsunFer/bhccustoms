@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>{{$title ?? 'Gymicetics'}}</title>
+  <title>{{$title ?? 'BHC Customs'}}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('assets/img/logo.jpg')}}" rel="icon">
-  <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
-
+  <!--<link href="{{asset('assets/img/logo.jpg')}}" rel="icon">
+<link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
   <!-- Google Fonts -->
@@ -61,9 +61,8 @@
         <header id="header" class="header fixed-top align-items-center bg-white shadow">
           <div class="d-flex">
             <div class="d-flex align-items-center justify-content-between">
-              <a href="{{route('gimnasta.index')}}" class="logo d-flex align-items-center">
-                <img src="{{asset('assets/img/logo.jpg')}}" alt="Gymicetics logo">
-                <span class="d-none d-lg-block">Gymicetics</span>
+              <a href="{{route('player.index')}}" class="logo d-flex align-items-center">
+                <span class="d-none d-lg-block">BHC Customs</span>
               </a>
               <i class="bi bi-list toggle-sidebar-btn"></i>
             </div><!-- End Logo -->
@@ -89,7 +88,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('gimnasta.index')}}">
+        <a class="nav-link collapsed" href="{{route('player.index')}}">
           <i class="bi bi-person-plus-fill"></i>
           <span>Players</span>
         </a>
@@ -97,7 +96,7 @@
 
       @if (Auth::user()->is_admin==true)  {{--Solo los admins tienen acceso--}}
         <li class="nav-item">
-          <a class="nav-link collapsed" href="{{route('gimnasta.create')}}">
+          <a class="nav-link collapsed" href="{{route('player.create')}}">
             <i class="bi bi-person-plus-fill"></i>
             <span>Add player</span>
           </a>
@@ -117,14 +116,14 @@
           <span>Equipos</span>
         </a>
       </li>-->
-      @if (Auth::user()->is_admin==true)  {{--Solo los admins tienen acceso--}}
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('score.index')}}">
           <i class="bx bx-list-check"></i>
-          <span>Scores</span>
+          <span>Stats</span>
         </a>
       </li>
-      @endif
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('forum.index')}}">

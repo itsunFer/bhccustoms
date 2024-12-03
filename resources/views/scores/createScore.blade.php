@@ -107,23 +107,17 @@
 
       <div class="col-md-4">
         <label for="rank" class="form-label">Rank: </label> <br>
-        <input name="rank" id="rank" class="form-control" required>
+        <input name="rank" id="rank" class="form-control" >
       </div>
 
       <div class="col-md-4">
         <label for="plants" class="form-label">Plants: </label> <br>
-        <input name="plants" id="plants" class="form-control" required>
-        @error('plants')
-              <h5>{{$message}}</h5>
-          @enderror
+        <input name="plants" id="plants" class="form-control" >
       </div>
 
       <div class="col-md-4">
         <label for="defuses" class="form-label">Defuses: </label> <br>
-        <input name="defuses" id="defuses" class="form-control" required>
-        @error('defuses')
-              <h5>{{$message}}</h5>
-          @enderror
+        <input name="defuses" id="defuses" class="form-control">
       </div>
 
       <input type="hidden" name="competencias_id" id="competencias_id" value="{{$competencia->id}}">

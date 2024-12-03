@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Gymicetics - Ingresar</title>
+  <title>BHC Stats - Join</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,13 +43,13 @@
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="{{route('gimnasta.index')}}">Gymicetics</a></h1>
+      <h1><a href="{{route('player.index')}}">BHC Stats</a></h1>
 
       <nav id="navbar" class="navbar">
         @if (Route::has('login'))
                 {{--<div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     @auth
-                        <a href="{{ route('gimnasta.index') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                        <a href="{{ route('player.index') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
@@ -60,7 +60,7 @@
                 </div>--}}
                 <ul>
                     @auth
-                        <li><a class="nav-link scrollto active" href="{{ route('gimnasta.index') }}">Inicio</a></li>
+                        <li><a class="nav-link scrollto active" href="{{ route('player.index') }}">Inicio</a></li>
                     @else
                         <li><a class="nav-link scrollto" href="{{ route('login') }}">Iniciar sesión</a></li>
 
@@ -79,9 +79,9 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
-      <h1>Te damos la bienvenida a Gymicetics</h1>
-      <h2>Un sitio hecho para fans de la gimnasia y el patinaje</h2>
-      <a href="{{route('gimnasta.index')}}" class="btn-get-started scrollto">Comienza</a>
+      <h1>welcome to BHC Customs Stats</h1>
+      <h2></h2>
+      <a href="{{route('player.index')}}" class="btn-get-started scrollto">Join</a>
     </div>
   </section><!-- End Hero -->
 

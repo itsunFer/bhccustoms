@@ -39,13 +39,13 @@ Route::middleware([
         //return view('dashboard');
         /*$gimnastas = Gimnasta::with('paises')->paginate(10); //Using 'with' we are implementing eager loading
         return view('gimnastas.indexGimnasta', compact('gimnastas'));*/
-        return redirect('gimnasta');
+        return redirect('player');
     })->name('dashboard');
 });
 
 //GIMNASTAS
-Route::resource('gimnasta', GimnastaController::class)->middleware('auth')->parameters([
-    'gimnasta' => 'gimnasta'
+Route::resource('player', GimnastaController::class)->middleware('auth')->parameters([
+    'player' => 'gimnasta'
 ]);
 
 //COMPETENCIAS
@@ -54,9 +54,9 @@ Route::resource('competencia', CompetenciaController::class)->middleware('auth')
 ]);
 
 //GALERIA
-Route::get('gimnasta/galeria/{gimnasta}',
+Route::get('player/galeria/{gimnasta}',
     [GimnastaController::class, 'galeria'])
-    ->name('gimnasta.galeria')
+    ->name('player.galeria')
     ->middleware('auth');
 
 
@@ -147,10 +147,10 @@ Route::post('equipo/administrar/{equipo}',
     ->middleware('auth');
 
 
-Route::get('/gimnastas', function () {
+Route::get('/players', function () {
     return gimnastaResource::collection(Gimnasta::all());
 })
-->name('gimnasta.json')
+->name('player.json')
 ->middleware('auth');
 
 

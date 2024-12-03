@@ -47,4 +47,12 @@ class Score extends Model
     public function changeScoresN(){
         return $this->hasMany(changeScore::class);
     }
+
+    public function getGametagAttribute($value){
+        return str_replace(' #', '#', $value);
+    }
+
+    public function setGametagAttribute($value){
+        $this->attributes['gametag'] = str_replace(' #', '#', $value);
+    }
 }

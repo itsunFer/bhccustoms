@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('gimnasta.index' /*dashboard*/) }}" :active="request()->routeIs('gimnasta.index')">
+                    <x-nav-link href="{{ route('player.index' /*dashboard*/) }}" :active="request()->routeIs('player.index')">
                         {{ __('Inicio') }}
                     </x-nav-link>
                 </div>

@@ -34,7 +34,7 @@
                     <td>{{$score->deaths}}</td>
                     <td>{{$score->assists}}</td>
                     <td>{{$score->kills - $score->deaths}}</td>
-                    <td>{{$score->kills / $score->deaths}}</td>
+                    <td>{{number_format($score->kills / $score->deaths,2)}}</td>
                     <td>{{$score->adr}}</td>
                     <td>{{number_format($score->hs*100,2)}}%</td>
                     <td>{{number_format($score->kast*100,2)}}%</td>
@@ -57,7 +57,7 @@
                     <td>{{$score->deaths}}</td>
                     <td>{{$score->assists}}</td>
                     <td>{{$score->kills - $score->deaths}}</td>
-                    <td>{{$score->kills / $score->deaths}}</td>
+                    <td>{{number_format($score->kills / $score->deaths,2)}}</td>
                     <td>{{$score->adr}}</td>
                     <td>{{number_format($score->hs*100,2)}}%</td>
                     <td>{{number_format($score->kast*100,2)}}%</td>

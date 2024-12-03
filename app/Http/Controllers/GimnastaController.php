@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pais;
-use App\Models\Picture;
+use App\Models\Score;
 use App\Models\Gimnasta;
 use Illuminate\Http\Request;
 use App\Mail\notificationMail;
@@ -46,7 +45,7 @@ class GimnastaController extends Controller
         $action = "añadido";
         $nombreGimnasta = $request->nombre_g . " " . $request->gametag;
 
-        return redirect('gimnasta')->with('gimnasta', 'agregada');
+        return redirect('player')->with('gimnasta', 'agregada');
     }
 
     /**
@@ -54,11 +53,26 @@ class GimnastaController extends Controller
      */
     public function show(Gimnasta $gimnasta)
     {
-        $imagen = Picture::where('gimnastas_id', '=', $gimnasta->id)
-        ->where('approved', true)
-        ->get(); //Searches up for the pictures of the gymnast
-        
-        return view('gimnastas.show-gimnasta', compact('gimnasta'));
+        $playerStats = \DB::table('scores')
+        ->join('competencias', 'scores.competencias_id', '=', 'competencias.id')
+        ->where('scores.gametag', $gimnasta->gametag) // Filter by player
+        ->select(
+            \DB::raw('SUM(kills) as overall_kills'),
+            \DB::raw('SUM(deaths) as overall_deaths'),
+            \DB::raw('SUM(assists) as overall_assists'),
+            \DB::raw('SUM(acs) / COUNT(*) as acs_per_game'),
+            \DB::raw('SUM(adr) / COUNT(*) as adr_per_game'),
+            \DB::raw('SUM(kills) / SUM(deaths) as kd_ratio'),
+            \DB::raw('AVG(hs) as avg_hs'),
+            \DB::raw('AVG(kast) as avg_kast'),
+            \DB::raw('SUM(fk) / COUNT(*) as fk_per_game'),
+            \DB::raw('SUM(fd) / COUNT(*) as fd_per_game'),
+            \DB::raw('COUNT(*) as games_played'),
+            \DB::raw('SUM(CASE WHEN competencias.winners = scores.winloss THEN 1 ELSE 0 END) as total_wins')
+        )
+        ->first();
+
+        return view('gimnastas.show-gimnasta', compact('gimnasta', 'playerStats'));
     }
 
     /**
@@ -85,7 +99,7 @@ class GimnastaController extends Controller
         $nombreGimnasta = $gimnasta->nombre_g . "'" . $gimnasta->gametag . "'";
         $action = "editado";
 
-        return redirect()->route('gimnasta.show', $gimnasta)->with('gimnasta', 'editada');
+        return redirect()->route('player.show', $gimnasta)->with('gimnasta', 'editada');
     }
 
     /**
@@ -101,7 +115,7 @@ class GimnastaController extends Controller
         $nombreGimnasta = $gimnasta->nombre_g . "'" . $gimnasta->gametag . "'";
         $action = "eliminado";
         $gimnasta->delete();
-        return redirect()->route('gimnasta.index')->with('gimnasta', 'eliminada');
+        return redirect()->route('player.index')->with('gimnasta', 'eliminada');
     }
 
     /**
@@ -112,7 +126,7 @@ class GimnastaController extends Controller
         $pics = Picture::where('gimnastas_id', '=', $gimnasta->id)
         ->where('approved', true) //solo imagenes aprobadas
         ->get();
-        return view('gimnastas.galeriaGimnasta', compact('gimnasta', 'pics'));
+        return view('players.galeriaGimnasta', compact('gimnasta', 'pics'));
     }
 
     /**
