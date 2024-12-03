@@ -72,12 +72,24 @@
           @endforeach
           
         </tbody>
-        <tr>
+        @if(Auth::user()->is_admin == true)
+            <tr>
                 <td><a href="{{route('score.create', $competencia->id)}}">
                     <i class="bi bi-clipboard-plus"></i>
                     <span>New Score</span>
                 </a></td>
             </tr>
+            <tr>
+              <td>
+                <form action="{{ route('csv.upload') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <label for="csv_file">Upload CSV File:</label>
+                <input type="file" name="csv_file" id="csv_file" required>
+                <button type="submit">Upload</button>
+                </form>
+              </td>
+            </tr>
+          @endif
       </table>
 
     <x/slot>

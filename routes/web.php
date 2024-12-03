@@ -10,6 +10,7 @@ use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\CSVController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,3 +133,7 @@ View::composer(['*'], function($view){ //envia informacion a todas las vistas
 Route::resource('news', NewsController::class)->middleware('auth');
 
 Route::resource('forum', ForumController::class)->middleware('auth');
+
+//CSV
+
+Route::post('/csv-upload', [CSVController::class, 'upload'])->name('csv.upload');
