@@ -6,7 +6,7 @@
                     <tbody>
                         <br>
                         <tr>
-                            <td>Usuario: {{ $comment->user->name }}</td>
+                            <td>User: {{ $comment->user->name }}</td>
                         </tr>
                         <tr>
                             @if ($editingCommentId === $comment->id)
@@ -24,8 +24,8 @@
                                     @if ($editingCommentId === $comment->id)
                                         <button wire:click="updateComment({{ $comment->id }})" class="btn btn-success">Guardar</button>
                                     @else
-                                        <button wire:click="editComment({{ $comment->id }})" class="btn btn-primary">Editar</button>
-                                        <button wire:click="deleteComment({{ $comment->id }})" class="btn btn-danger">Eliminar</button>
+                                        <button wire:click="editComment({{ $comment->id }})" class="btn btn-primary">Edit</button>
+                                        <button wire:click="deleteComment({{ $comment->id }})" class="btn btn-danger">Delete</button>
                                     @endif
                                 </td>
                             @endif
@@ -39,9 +39,9 @@
     <form wire:submit.prevent="submitComment">
         @csrf
         <div class="form-group">
-            <textarea wire:model="content" class="form-control" rows="4" placeholder="Añadir comentario"></textarea>
+            <textarea wire:model="content" class="form-control" rows="4" placeholder="New Comment"></textarea>
             @error('content') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">Send</button>
     </form>
 </div>

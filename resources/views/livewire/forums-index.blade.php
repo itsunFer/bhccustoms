@@ -1,17 +1,17 @@
 <div>
     <div class='row'>
         <div class="col-md-4">
-            <label for="title">Titulo</label>
+            <label for="title">Title</label>
             <input type="text" wire:model='titleFilter' class="form-control" name="title" id="title">
         </div>
         <div class="col-md-4">
-            <label for="author">Autor</label>
+            <label for="author">Author</label>
             <input type="text" wire:model='authorFilter' class="form-control" name="author" id="author">
         </div>
         <div class="col-md-4">
-          <label for="tagFilter">Etiqueta:</label>
+          <label for="tagFilter">Tags:</label>
           <select wire:model="selectedTag" class="form-control" id="tagFilter">
-              <option value="">Todas las Etiquetas</option>
+              <option value="">All Tags</option>
               @foreach ($tags as $tag)
                   <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
               @endforeach
@@ -28,11 +28,11 @@
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Titulo</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Fecha de publicacion</th>
-            <th scope="col">Etiquetas</th>
-            <th class='text-center' scope="col">Ver detalle</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Date</th>
+            <th scope="col">Tags</th>
+            <th class='text-center' scope="col">Details</th>
           </tr>
         </thead>
         <tbody>
