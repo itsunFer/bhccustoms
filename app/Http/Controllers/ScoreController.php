@@ -40,9 +40,42 @@ class ScoreController extends Controller
     {
        $request['user_id'] = Auth::user()->id;
        $request['approved'] = Auth::user()->is_admin == true ? true : false; //si es administrador la aprobará, de lo contrario la deniega
-       $score = new Score();
-       $score->fill($request->all());
-       $score->save();
+       $competencia = Competencia::find($request->input('competencias_id'));
+
+        // Determine if 'W' or 'L' corresponds to 0 or 1
+        $winloss = strtoupper($request->input('winloss')); // Get win/loss input as 'W' or 'L'
+        
+
+        if ($winloss === 'W') {
+            // If 'W', set winloss based on the competencia's winner (0 or 1)
+            $winlossValue = ($competencia->winners == 1) ? 1 : 0;
+        } elseif ($winloss === 'L') {
+            // If 'L', set the opposite of the competencia's winner
+            $winlossValue = ($competencia->winners == 1) ? 0 : 1;
+        } else {
+            return redirect()->back()->with('error', 'Invalid win/loss value.');
+        }
+        
+        // Save the score to the database
+        $score = new Score([
+            'gametag' => $request->input('gametag'),
+            'kills' => $request->input('kills'),
+            'deaths' => $request->input('deaths'),
+            'assists' => $request->input('assists'),
+            'acs' => $request->input('acs'),
+            'adr' => $request->input('adr'),
+            'dd' => $request->input('dd'),
+            'hs' => $request->input('hs'),
+            'kast' => $request->input('kast'),
+            'fk' => $request->input('fk'),
+            'fd' => $request->input('fd'),
+            'competencias_id' => $request->input('competencias_id'),
+            'winloss' => $winlossValue, // Store 0 or 1
+            'rank' => $request->input('rank'),
+            'plants' => $request->input('plants'),
+            'defuses' => $request->input('defuses'),
+        ]);
+        $score->save();
        return redirect()->route('competencia.show', $request->input('competencias_id'));
     }
 

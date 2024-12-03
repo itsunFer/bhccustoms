@@ -109,13 +109,6 @@
           <span>Games</span>
         </a>
       </li>
-      <!--
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('equipo.index')}}">
-          <i class="ri-team-fill"></i>
-          <span>Equipos</span>
-        </a>
-      </li>-->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('score.index')}}">

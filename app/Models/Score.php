@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Event;
-use App\Models\Round;
-use App\Models\Aparato;
 use App\Models\Gimnasta;
 use App\Models\competencias;
 use Illuminate\Database\Eloquent\Model;

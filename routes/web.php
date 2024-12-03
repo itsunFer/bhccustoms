@@ -1,15 +1,11 @@
 <?php
 
-use App\Models\Pais;
 use App\Models\Gimnasta;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\gimnastaResource;
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\ScoreController;
-use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\GimnastaController;
-use App\Http\Controllers\ChangeScoreController;
 use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CommentController;
@@ -78,20 +74,6 @@ Route::delete('picture/{picture}/denyP',
     ->name('picture.denyP')
     ->middleware('auth');
 
-// EVENTS
-
-Route::resource('event', EventController::class)->middleware('auth');
-
-Route::get('event/add-event/{competencia}',
-    [EventController::class, 'newEvent'])
-    ->name('event.newEvent')
-    ->middleware('auth');
-
-Route::get('event/{event}/controlI',
-    [EventController::class, 'controlI'])
-    ->name('event.controlI')
-    ->middleware('auth');
-
 //SCORES
 Route::get('score/create/{competencia}',
     [ScoreController::class, 'create'])
@@ -123,11 +105,6 @@ Route::get('score',
     ->name('score.index')
     ->middleware('auth');
 
-Route::get('score/{event}/pdf',
-    [ScoreController::class, 'createpdf'])
-    ->name('score.pdf')
-    ->middleware('auth');
-
 Route::patch('score/{score}/aproveI',
     [ScoreController::class, 'aproveI'])
     ->name('score.aproveI')
@@ -136,14 +113,6 @@ Route::patch('score/{score}/aproveI',
 Route::delete('score/{score}/denyI',
     [ScoreController::class, 'denyI'])
     ->name('score.denyI')
-    ->middleware('auth');
-
-//EQUIPOS
-Route::resource('equipo', EquipoController::class)->middleware('auth');
-
-Route::post('equipo/administrar/{equipo}',
-    [EquipoController::class, 'adminEquipos'])
-    ->name('equipo.admin')
     ->middleware('auth');
 
 
@@ -158,23 +127,6 @@ View::composer(['*'], function($view){ //envia informacion a todas las vistas
     $gimn = Gimnasta::all();
     $view->with('gimn', $gimn);
 });
-
-//CHANGESCORES
-
-Route::get('changescore',
-    [ChangeScoreController::class, 'index'])
-    ->name('changescore.index')
-    ->middleware('auth');
-
-Route::patch('changescore/{changeScore}/aproveE',
-    [ChangeScoreController::class, 'aproveE'])
-    ->name('changescore.aproveE')
-    ->middleware('auth');
-
-Route::delete('changescore/{changeScore}/denyE',
-    [ChangeScoreController::class, 'denyE'])
-    ->name('changescore.denyE')
-    ->middleware('auth');
 
 //NEWS
 Route::resource('news', NewsController::class)->middleware('auth');

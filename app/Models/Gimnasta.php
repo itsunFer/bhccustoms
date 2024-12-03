@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Score;
-use App\Models\Equipo;
 use App\Models\Picture;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;

@@ -3,7 +3,7 @@
       Edit player
     </x-slot>
     <h1>Edit player</h1>
-    <form class="row g-3" action="{{route('gimnasta.update', $gimnasta)}}" method="POST">
+    <form class="row g-3" action="{{route('player.update', $gimnasta)}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="col-12">

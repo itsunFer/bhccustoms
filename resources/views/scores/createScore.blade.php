@@ -19,7 +19,10 @@
 
       <div class="col-md-4">
         <label for="winloss" class="form-label">W/L: </label> <br>
-        <input name="winloss" id="winloss" class="form-control" required>
+        <select name="winloss" id="winloss" class="form-control" required>
+            <option value="w">W</option>
+            <option value="l">L</option>
+        </select>
         @error('winloss')
               <h5>{{$message}}</h5>
           @enderror
